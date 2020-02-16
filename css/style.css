@@ -1,0 +1,7 @@
+body {
+    background: url(../img/maxresdefault.jpg);
+}
+
+body .container {
+    margin-top:25vh;
+}
