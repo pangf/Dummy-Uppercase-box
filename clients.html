@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <title>Dummy upper case input box</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <h1 class="m-auto text-center">Dummy uppercase textbox</h1>
+      <form class="col-12">
+        <div class="form-group">
+          <label for="formGroupExampleInput" class="text-uppercase">input</label>
+          <input type="text" class="form-control" placeholder="lowercase input" id="user_text" onkeyup="updateText()">
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2" class="text-uppercase">output</label>
+          <input type="text" class="form-control" placeholder="uppercase output" name="server_response"
+            id="server_response" readonly>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function updateText() {
+      //var current_text=document.getElementById('user_text').value;
+
+      var current_text = $("#user_text").val();
+
+      var http = new XMLHttpRequest();
+      http.onreadystatechange = function () {
+        //only run server get response successful
+        console.log(http.readyState);
+        if (http.readyState == 4 && http.status == 200) {
+
+
+          var response = http.responseText;
+          console.log(response);
+          $("#server_response").val(response);
+          //document.getElementById("server_response").value=response;
+
+
+        };
+
+
+      };
+      //send text
+      http.open("GET", "http://localhost/ajaxtest/server.php?user_text=" + current_text, true);
+      http.send();
+
+    }
+  </script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
